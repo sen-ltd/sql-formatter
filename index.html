@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SQL Formatter</title>
+  <meta name="description" content="SQL formatter and beautifier with custom tokenizer, keyword case conversion, and minify. Zero dependencies." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="header-left">
+      <h1 data-i18n="title">SQL Formatter</h1>
+      <p class="subtitle" data-i18n="subtitle">Format &amp; beautify SQL queries</p>
+    </div>
+    <div class="header-right">
+      <button id="btn-lang" class="icon-btn" title="Switch language">日本語</button>
+      <button id="btn-theme" class="icon-btn" title="Toggle theme">☀️</button>
+    </div>
+  </header>
+
+  <main class="main">
+    <!-- Options Panel -->
+    <section class="options-panel">
+      <div class="option-group">
+        <label for="keyword-case" data-i18n="keywordCaseLabel">Keyword Case</label>
+        <select id="keyword-case">
+          <option value="upper" data-i18n="keywordCaseUpper">UPPERCASE</option>
+          <option value="lower" data-i18n="keywordCaseLower">lowercase</option>
+          <option value="capitalize" data-i18n="keywordCaseCapitalize">Capitalize</option>
+        </select>
+      </div>
+
+      <div class="option-group">
+        <label for="indent-size" data-i18n="indentLabel">Indent</label>
+        <select id="indent-size">
+          <option value="2" data-i18n="indent2">2 spaces</option>
+          <option value="4" data-i18n="indent4">4 spaces</option>
+          <option value="8" data-i18n="indent8">8 spaces</option>
+          <option value="tab" data-i18n="indentTab">Tab</option>
+        </select>
+      </div>
+
+      <div class="option-group">
+        <label for="dialect" data-i18n="dialectLabel">SQL Dialect</label>
+        <select id="dialect">
+          <option value="generic" data-i18n="dialectGeneric">Generic</option>
+          <option value="postgresql" data-i18n="dialectPostgres">PostgreSQL</option>
+          <option value="mysql" data-i18n="dialectMySQL">MySQL</option>
+          <option value="sqlite" data-i18n="dialectSQLite">SQLite</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- Editor Area -->
+    <div class="editor-container">
+      <!-- Input -->
+      <div class="pane">
+        <div class="pane-header">
+          <span data-i18n="inputLabel">Input SQL</span>
+          <span id="input-stats" class="stats"></span>
+        </div>
+        <textarea
+          id="input"
+          class="sql-editor"
+          spellcheck="false"
+          autocomplete="off"
+          autocorrect="off"
+          autocapitalize="off"
+          data-i18n-attr="placeholder"
+          data-i18n="inputPlaceholder"
+          placeholder="Paste your SQL here..."
+        ></textarea>
+      </div>
+
+      <!-- Output -->
+      <div class="pane">
+        <div class="pane-header">
+          <span data-i18n="outputLabel">Formatted Output</span>
+          <span id="output-stats" class="stats"></span>
+        </div>
+        <div class="output-wrap">
+          <pre id="output-highlight" class="output-highlight" aria-hidden="true"></pre>
+          <textarea
+            id="output"
+            class="sql-editor output-editor"
+            spellcheck="false"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            readonly
+            data-i18n-attr="placeholder"
+            data-i18n="outputPlaceholder"
+            placeholder="Formatted SQL will appear here..."
+          ></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-bar">
+      <button id="btn-format" class="btn btn-primary" data-i18n="formatBtn">Format</button>
+      <button id="btn-minify" class="btn btn-secondary" data-i18n="minifyBtn">Minify</button>
+      <button id="btn-copy" class="btn btn-secondary" data-i18n="copyBtn">Copy</button>
+      <button id="btn-clear" class="btn btn-ghost" data-i18n="clearBtn">Clear</button>
+      <div class="examples-wrap">
+        <button id="btn-examples" class="btn btn-ghost" data-i18n="examplesBtn">Examples</button>
+        <div id="examples-panel" class="examples-panel hidden"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <span>SQL Formatter — <a href="https://github.com/masaru87/sql-formatter" target="_blank" rel="noopener">GitHub</a></span>
+    <span>SEN LLC &copy; 2026</span>
+  </footer>
+
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>

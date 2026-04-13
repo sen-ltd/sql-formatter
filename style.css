@@ -1,0 +1,421 @@
+/* SQL Formatter — Styles */
+
+/* ── Variables ─────────────────────────────────────────────────────────────── */
+
+:root {
+  --font-mono: 'Fira Code', 'Cascadia Code', 'JetBrains Mono', 'Consolas', monospace;
+  --font-ui: 'Inter', system-ui, -apple-system, sans-serif;
+  --radius: 6px;
+  --radius-lg: 10px;
+  --transition: 0.15s ease;
+}
+
+[data-theme="dark"] {
+  --bg: #0f1117;
+  --bg-surface: #1a1d27;
+  --bg-elevated: #22253a;
+  --bg-hover: #2a2e42;
+  --border: #2e3148;
+  --text: #e4e6f0;
+  --text-muted: #7b80a4;
+  --text-subtle: #4a4f6a;
+  --primary: #6c8aff;
+  --primary-hover: #5a78f0;
+  --secondary: #3a3f5a;
+  --secondary-hover: #454a68;
+  --accent: #a78bfa;
+
+  /* Syntax highlight */
+  --hl-keyword: #6c8aff;
+  --hl-string: #7ec8a0;
+  --hl-number: #f4b86e;
+  --hl-comment: #5a6080;
+  --hl-operator: #e06c75;
+  --hl-punctuation: #9aa2c8;
+  --hl-identifier: #e4e6f0;
+}
+
+[data-theme="light"] {
+  --bg: #f5f6fa;
+  --bg-surface: #ffffff;
+  --bg-elevated: #eef0f8;
+  --bg-hover: #e4e6f2;
+  --border: #d0d4e8;
+  --text: #1e2140;
+  --text-muted: #5a6080;
+  --text-subtle: #a0a8c0;
+  --primary: #4c6ef5;
+  --primary-hover: #3b5de8;
+  --secondary: #e4e6f2;
+  --secondary-hover: #d8daf0;
+  --accent: #7c3aed;
+
+  /* Syntax highlight */
+  --hl-keyword: #2563eb;
+  --hl-string: #16a34a;
+  --hl-number: #d97706;
+  --hl-comment: #9ca3af;
+  --hl-operator: #dc2626;
+  --hl-punctuation: #6b7280;
+  --hl-identifier: #1e2140;
+}
+
+/* ── Reset ──────────────────────────────────────────────────────────────────── */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 14px;
+}
+
+body {
+  font-family: var(--font-ui);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: background var(--transition), color var(--transition);
+}
+
+/* ── Header ─────────────────────────────────────────────────────────────────── */
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.header h1 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.subtitle {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.header-right {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.icon-btn {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: var(--radius);
+  padding: 0.35rem 0.65rem;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+
+.icon-btn:hover {
+  background: var(--bg-hover);
+}
+
+/* ── Main ───────────────────────────────────────────────────────────────────── */
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 1.5rem;
+  gap: 0.75rem;
+  max-width: 1600px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* ── Options Panel ──────────────────────────────────────────────────────────── */
+
+.options-panel {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 0.75rem 1rem;
+}
+
+.option-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.option-group label {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+select {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: var(--radius);
+  padding: 0.28rem 0.5rem;
+  font-size: 0.82rem;
+  font-family: var(--font-ui);
+  cursor: pointer;
+  outline: none;
+  transition: border-color var(--transition);
+}
+
+select:hover, select:focus {
+  border-color: var(--primary);
+}
+
+/* ── Editor Container ───────────────────────────────────────────────────────── */
+
+.editor-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  flex: 1;
+  min-height: 0;
+}
+
+@media (max-width: 768px) {
+  .editor-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pane {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.pane-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  background: var(--bg-elevated);
+  border-bottom: 1px solid var(--border);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.stats {
+  font-size: 0.72rem;
+  color: var(--text-subtle);
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* ── Textarea / Editor ──────────────────────────────────────────────────────── */
+
+.sql-editor {
+  flex: 1;
+  width: 100%;
+  min-height: 320px;
+  padding: 0.75rem;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  resize: vertical;
+  tab-size: 4;
+  white-space: pre;
+  overflow-wrap: normal;
+  overflow-x: auto;
+}
+
+.sql-editor::placeholder {
+  color: var(--text-subtle);
+}
+
+.sql-editor:focus {
+  outline: none;
+}
+
+/* ── Syntax Highlight Overlay ───────────────────────────────────────────────── */
+
+.output-wrap {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.output-highlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0.75rem;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  white-space: pre;
+  overflow: auto;
+  pointer-events: none;
+  color: transparent;
+  background: transparent;
+  border: none;
+  tab-size: 4;
+  overflow-wrap: normal;
+}
+
+.output-editor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  color: transparent;
+  caret-color: var(--text);
+  resize: none;
+}
+
+/* Syntax token styles */
+.hl-keyword    { color: var(--hl-keyword); font-weight: 600; }
+.hl-string     { color: var(--hl-string); }
+.hl-number     { color: var(--hl-number); }
+.hl-comment    { color: var(--hl-comment); font-style: italic; }
+.hl-operator   { color: var(--hl-operator); }
+.hl-punctuation { color: var(--hl-punctuation); }
+
+/* ── Action Bar ─────────────────────────────────────────────────────────────── */
+
+.action-bar {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.btn {
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  font-size: 0.85rem;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition), color var(--transition);
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
+.btn-primary:hover {
+  background: var(--primary-hover);
+  border-color: var(--primary-hover);
+}
+
+.btn-secondary {
+  background: var(--secondary);
+  color: var(--text);
+  border-color: var(--border);
+}
+
+.btn-secondary:hover {
+  background: var(--secondary-hover);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-muted);
+  border-color: var(--border);
+}
+
+.btn-ghost:hover {
+  background: var(--bg-elevated);
+  color: var(--text);
+}
+
+/* ── Examples Panel ─────────────────────────────────────────────────────────── */
+
+.examples-wrap {
+  position: relative;
+}
+
+.examples-panel {
+  position: absolute;
+  bottom: calc(100% + 0.5rem);
+  left: 0;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  z-index: 100;
+  min-width: 200px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.examples-panel.hidden {
+  display: none;
+}
+
+.example-btn {
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-size: 0.82rem;
+  font-family: var(--font-ui);
+  text-align: left;
+  padding: 0.4rem 0.6rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background var(--transition);
+}
+
+.example-btn:hover {
+  background: var(--bg-elevated);
+}
+
+/* ── Footer ─────────────────────────────────────────────────────────────────── */
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.6rem 1.5rem;
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.footer a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
