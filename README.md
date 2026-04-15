@@ -62,3 +62,10 @@ sql-formatter/
 ## License
 
 MIT © 2026 SEN LLC (SEN 合同会社)
+
+<!-- sen-publish:links -->
+## Links
+
+- 🌐 Demo: https://sen.ltd/portfolio/sql-formatter/
+- 📝 dev.to: https://dev.to/sendotltd/writing-a-sql-formatter-with-a-handwritten-tokenizer-5c66
+<!-- /sen-publish:links -->
